@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Flow Diagram Editor</title>
+  <link rel="stylesheet" href="css/editor.css">
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <header class="toolbar">
+    <h1>Flow Diagram Editor</h1>
+    <div class="group" role="group" aria-label="File">
+      <button id="btn-new" title="Start a new, empty diagram">New</button>
+      <button id="btn-open" title="Open a diagram (.json, or a PDF / PNG / SVG made by this editor)">Open…</button>
+      <button id="btn-save" title="Save the diagram as a .json file you can open again">Save…</button>
+    </div>
+    <div class="group" role="group" aria-label="Export">
+      <button id="btn-pdf" title="Export as a PDF file">Export PDF</button>
+      <button id="btn-png" title="Export as a PNG image">Export PNG</button>
+      <button id="btn-svg" title="Export as an SVG image">Export SVG</button>
+    </div>
+    <div class="group" role="group" aria-label="Selected item">
+      <button id="btn-edit" title="Type in the selected shape (Enter)">Edit text</button>
+      <button id="btn-swap" title="Swap the True and False arrows">Swap True / False</button>
+      <button id="btn-auto" title="Let the editor choose where this arrow starts and ends">Auto route</button>
+      <button id="btn-fit-size" title="Make the shape its normal size again">Reset size</button>
+      <button id="btn-delete" title="Delete the selected item (Delete)">Delete</button>
+    </div>
+    <div class="group zoom" role="group" aria-label="Zoom">
+      <button id="btn-zoom-out" title="Zoom out" aria-label="Zoom out">−</button>
+      <span id="zoom-level" aria-live="polite">150%</span>
+      <button id="btn-zoom-in" title="Zoom in" aria-label="Zoom in">+</button>
+      <button id="btn-fit" title="Show the whole diagram">Fit</button>
+    </div>
+  </header>
+
+  <main>
+    <nav class="palette" id="palette" aria-label="Shapes">
+      <p class="palette-title">Shapes</p>
+    </nav>
+    <div class="canvas-wrap" id="canvas-wrap">
+      <svg id="canvas" xmlns="http://www.w3.org/2000/svg" aria-label="Diagram">
+        <g id="content"></g>
+        <g id="overlay"></g>
+      </svg>
+      <textarea id="text-editor" spellcheck="false" autocomplete="off" hidden></textarea>
+    </div>
+  </main>
+
+  <footer class="status" id="hint" aria-live="polite"></footer>
+  <div class="toast" id="toast" role="alert" hidden></div>
+
+  <dialog id="name-dialog">
+    <form method="dialog">
+      <h2 id="name-title">Save</h2>
+      <label for="name-input">File name</label>
+      <input id="name-input" type="text" autocomplete="off" spellcheck="false">
+      <p class="note" id="name-note"></p>
+      <div class="buttons">
+        <button value="cancel">Cancel</button>
+        <button value="ok" class="primary" id="name-ok">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <input type="file" id="file-input" hidden
+         accept=".json,.pdf,.png,.svg,application/json,application/pdf,image/png,image/svg+xml">
+</body>
+</html>
